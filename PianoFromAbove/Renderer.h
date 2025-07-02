@@ -38,6 +38,8 @@ public:
     virtual HRESULT DrawSkew( float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, DWORD color ) = 0;
     virtual HRESULT DrawSkew( float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4,
                               DWORD c1, DWORD c2, DWORD c3, DWORD c4 ) = 0;
+    // 添加钢琴背景绘制函数
+    virtual HRESULT DrawPianoBackground(float x, float y, float cx, float cy) = 0;
 
     bool GetLimitFPS() const { return m_bLimitFPS; }
     HRESULT SetLimitFPS( bool bLimitFPS );
@@ -89,6 +91,8 @@ public:
     HRESULT DrawSkew( float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, DWORD color );
     HRESULT DrawSkew( float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4,
                       DWORD c1, DWORD c2, DWORD c3, DWORD c4 );
+    // 实现钢琴背景绘制函数
+    HRESULT DrawPianoBackground(float x, float y, float cx, float cy);
     HRESULT BeginStaticBuffer( int iTriangles );
     HRESULT EndStaticBuffer();
     HRESULT DrawStaticBuffer();
