@@ -239,9 +239,15 @@ HRESULT D3D9Renderer::Present()
     return hr;
 }
 
+// 修改为左橙右蓝渐变
 HRESULT D3D9Renderer::DrawRect( float x, float y, float cx, float cy, DWORD color )
 {
-    return DrawRect( x, y, cx, cy, color, color, color, color );
+    return DrawRect( x, y, cx, cy, 
+                    0xFFFFA500, // 橙色 (左上)
+                    0xFF0000FF, // 蓝色 (右上)
+                    0xFF0000FF, // 蓝色 (右下)
+                    0xFFFFA500  // 橙色 (左下)
+    );
 }
 
 HRESULT D3D9Renderer::DrawRect( float x, float y, float cx, float cy,
@@ -282,6 +288,20 @@ HRESULT D3D9Renderer::DrawSkew( float x1, float y1, float x2, float y2, float x3
     };
 
     return Blit( vertices, 2 );
+}
+
+// 实现钢琴背景绘制函数（透明35的橙蓝渐变）
+HRESULT D3D9Renderer::DrawPianoBackground(float x, float y, float cx, float cy)
+{
+    const DWORD transparentOrange = 0x23FFA500; // 透明度35的橙色
+    const DWORD transparentBlue   = 0x230000FF; // 透明度35的蓝色
+    
+    return DrawRect( x, y, cx, cy,
+                    transparentOrange, // 左上
+                    transparentBlue,   // 右上
+                    transparentBlue,   // 右下
+                    transparentOrange  // 左下
+    );
 }
 
 HRESULT D3D9Renderer::Blit( SCREEN_VERTEX *vertices, int iTriangles )
